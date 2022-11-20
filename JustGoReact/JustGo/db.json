@@ -1,0 +1,46 @@
+{
+  "contacts": [
+    {
+      "id": "3092b954-d671-4532-84f9-18aa68e4d944",
+      "fullName": "Bilal Khan",
+      "email": "bilal@gmail.com",
+      "phone": "0700854211",
+      "address": "Södertälje"
+    },
+    {
+      "id": "3092b954-d671-4532-84f9-18aa68e4d955",
+      "fullName": "Asma Khan",
+      "email": "asmakhan@gmail.com",
+      "phone": "070055421",
+      "address": "Sweden"
+    },
+    {
+      "id": "3092b954-d671-4532-84f9-18aa68e4d9",
+      "fullName": "Bilal Khan",
+      "email": "typicode@gmail.com",
+      "phone": "070085421",
+      "address": "Sodertalje"
+    },
+    {
+      "id": "3092b954-d1-4532-84f9-18aa68e4d944",
+      "fullName": "Bilal Khan",
+      "email": "typicode@gmail.com",
+      "phone": "070085421",
+      "address": "Sodertalje"
+    },
+    {
+      "id": "3092b954-d671-4532-84f9-18e4d955",
+      "fullName": "Asma Khan",
+      "email": "asmakhan@gmail.com",
+      "phone": "070055421",
+      "address": "Sweden"
+    },
+    {
+      "id": "3456890",
+      "fullName": "Raima",
+      "email": "raima@gmail.com",
+      "phone": "567788987",
+      "address": "Sodertalje Sweden"
+    }
+  ]
+}
