@@ -1,9 +1,7 @@
-﻿using JustGoApi.Data;
-using JustGoApi.Models;
-using JustGoApi.Services;
+﻿using JustGoApi.Services;
 using JustGoApi.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace ContactsApiProject.Controllers
 {
@@ -23,7 +21,6 @@ namespace ContactsApiProject.Controllers
             return Ok(await _justGoService.GetAllContacts());   
         }
 
-
         [HttpGet]
         [Route("{id:guid}")]
         public async Task<IActionResult> GetContact([FromRoute] Guid id)
@@ -41,21 +38,7 @@ namespace ContactsApiProject.Controllers
         [HttpPost]
         public async Task<IActionResult> AddContact(AddContactRequest addContactRequest)
         {
-            //var contact = new Contact()
-            //{
-            //    Id = Guid.NewGuid(),
-            //    FullName = addContactRequest.FullName,
-            //    Email = addContactRequest.Email,
-            //    Phone = addContactRequest.Phone,
-            //    Address = addContactRequest.Address
-            //};
-
-            //await _justGoService.AddContact(addContactRequest);
-            //await _justGoService.SaveChangesAsync();
-
             return Ok(await _justGoService.AddContact(addContactRequest)); 
-
-            //return Ok(contact);
         }
 
 
@@ -72,17 +55,6 @@ namespace ContactsApiProject.Controllers
             }
             return Ok(contact);
 
-            //if (contact != null)
-            //{
-            //    contact.FullName = updateContactRequest.FullName;
-            //    contact.Email = updateContactRequest.Email;
-            //    contact.Phone = updateContactRequest.Phone;
-            //    contact.Address = updateContactRequest.Address;
-
-            //    await _dbContext.SaveChangesAsync();
-            //    return Ok(contact);
-            //}
-            //return NotFound();
         }
 
 
@@ -90,28 +62,12 @@ namespace ContactsApiProject.Controllers
         [Route("{id:guid}")]
         public async Task<IActionResult> DeleteContact([FromRoute] Guid id)
         {
-
             var contact = await _justGoService.DeleteContact(id);
-            
             if (contact==null)
             {
                 return NotFound();
             }
-
             return Ok(contact);
-
-            //var contact = await _dbContext.Contacts.FindAsync(id);
-
-            //if (contact != null)
-            //{
-            //    _dbContext.Remove(contact);
-            //    await _dbContext.SaveChangesAsync();
-            //    return Ok(contact);
-            //}
-
-            //return NotFound();
         }
-
-
     }
 }
