@@ -8,9 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 
-// I Injected following service
+// I Injected following service 
 
 builder.Services.AddScoped<IJustGoService, JustGoService>();
+builder.Services.AddScoped<IListingService, ListingService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
