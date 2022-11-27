@@ -9,9 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 // I Injected following service 
-
-builder.Services.AddScoped<IJustGoService, JustGoService>();
 builder.Services.AddScoped<IListingService, ListingService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -23,8 +23,8 @@ builder.Services.AddSwaggerGen();
 
 
 //I added to connect with Sql Server
-builder.Services.AddDbContext<ContactsDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("ContactsApiConnectionString")));
+builder.Services.AddDbContext<ReuseDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("ReuseApiConnectionString")));
 
 
 //I added to communicate with react

@@ -7,8 +7,8 @@ namespace JustGoApi.Services
 {
     public class ListingService : IListingService
     {
-        private readonly ContactsDbContext _dbContext;
-        public ListingService(ContactsDbContext dbContext)
+        private readonly ReuseDbContext _dbContext;
+        public ListingService(ReuseDbContext dbContext)
         {
             _dbContext = dbContext;
         }
