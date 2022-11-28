@@ -30,11 +30,11 @@ namespace JustGoApi.Handler
                 string[] array = credentials.Split(":");
                 string username=array[0];
                 string password=array[1];
-                var user=this._DBContext.Users.FirstOrDefault(item=>item.Name == username && item.Password==password);
+                var user=this._DBContext.Users.FirstOrDefault(item=>item.Email == username && item.Password==password);
                 if(user==null)
                   return AuthenticateResult.Fail("Unauthorized");
 
-                var claim = new[]{new Claim(ClaimTypes.Name, username)};
+                var claim = new[]{new Claim(ClaimTypes.Email, username)};
                 var identity=new ClaimsIdentity(claim,Scheme.Name);
                 var principal=new ClaimsPrincipal(identity);
                 var ticket=new AuthenticationTicket(principal,Scheme.Name);
