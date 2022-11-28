@@ -1,10 +1,12 @@
 ﻿using JustGoApi.Models;
 using JustGoApi.Services;
 using JustGoApi.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JustGoApi.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ListingController : Controller

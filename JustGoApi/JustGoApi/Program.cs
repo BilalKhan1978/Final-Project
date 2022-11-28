@@ -1,5 +1,7 @@
 using JustGoApi.Data;
+using JustGoApi.Handler;
 using JustGoApi.Services;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 //using Microsoft.Extensions.Configuration;
 
@@ -16,6 +18,8 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAuthentication("BasicAuthentication").AddScheme<AuthenticationSchemeOptions,BasicAuthenticationHandler>("BasicAuthentication", null);
 
 // I added these lines for InMemoryDatabase
 //builder.Services.AddDbContext<ContactsDbContext>(options =>
@@ -48,6 +52,9 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
+
+// I added
+app.UseAuthentication();
 
 app.UseAuthorization();
 

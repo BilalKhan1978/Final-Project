@@ -17,6 +17,21 @@ namespace JustGoApi.Services
         {
             var listings = await _dbContext.Listings.Include(x => x.Category).Include(x => x.User).ToListAsync(); 
             return listings.Select(x => x.ToDto()).ToList();
+
+            //var listingList = new List<ListingDto>();
+            //listings.ForEach(listing =>
+            //{
+            //    var listingDto = new ListingDto
+            //    {
+            //        Id = listing.Id,
+            //        Title = listing.Title,
+            //        Price = listing.Price,
+            //        CategoryId = listing.Category.Id,
+            //        UserId = listing.User.Id
+
+            //    };
+            //    listingList.Add(listingDto);
+            //});
         }
         public async Task<ListingDto> GetOnelisting(int id)
         {
