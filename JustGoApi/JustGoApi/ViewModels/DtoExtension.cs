@@ -1,4 +1,5 @@
 ﻿using JustGoApi.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace JustGoApi.ViewModels
 {
@@ -11,7 +12,8 @@ namespace JustGoApi.ViewModels
                 Id = listingModel.Id,
                 Title = listingModel.Title,
                 Price = listingModel.Price,
-                CategoryId= listingModel.Category.Id,
+                CategoryId = listingModel.Category.Id,
+                ImageName=listingModel.ImageName,
                 UserId  =   listingModel.User.Id
 
             };

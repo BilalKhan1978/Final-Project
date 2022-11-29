@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JustGoApi.Models
 {
@@ -7,8 +8,10 @@ namespace JustGoApi.Models
     {
       public int Id { get; set; }
       public string Title { get; set; }
+      [NotMapped]
       public byte[] Image { get; set; }
-      public float Price { get; set; }
+      public string? ImageName { get; set; }
+      public decimal Price { get; set; }
       [Required]
       public Category Category { get; set; }
       [Required]

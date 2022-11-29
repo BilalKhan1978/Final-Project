@@ -40,16 +40,16 @@ namespace JustGoApi.Services
                 throw new Exception("Not found");
             return listing.ToDto();
         }
-        public async Task AddListing(AddListingRequest addListingRequest)
+        public async Task AddListing(AddListingRequest addListingRequest, string fileName)
         {
             var category = await _dbContext.Categories.FindAsync(addListingRequest.CategoryId);
             var user = await _dbContext.Users.FindAsync(addListingRequest.UserId);
-            var bytes = await addListingRequest.Image.GetBytes();
+           // var bytes = await addListingRequest.Image.GetBytes();
             var listing = new Listing()
             {
                 Title=addListingRequest.Title,
                 Price=addListingRequest.Price,
-                Image= bytes,
+                ImageName=fileName,
                 Category=category,
                 User = user
             };
@@ -77,18 +77,19 @@ namespace JustGoApi.Services
             await _dbContext.SaveChangesAsync();
 
         }
-        public async Task<byte[]> GetImage(int id)
-        {
-            var listing = await _dbContext.Listings.FindAsync(id);
+        //public async Task<byte[]> GetImage(int id)
+        //{
+        //    var listing = await _dbContext.Listings.FindAsync(id);
 
 
-            if (listing == null)
-            {
-                throw new Exception("Not found");
+        //    if (listing == null)
+        //    {
+        //        throw new Exception("Not found");
 
-            }
-            return listing.Image;
+        //    }
+        //    return listing.Image;
 
-        }
+        //}
+        
     }
 }

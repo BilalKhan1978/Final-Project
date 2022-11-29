@@ -7,8 +7,8 @@ namespace JustGoApi.Services
     {
         Task<List<ListingDto>> GetAllListing();
         Task<ListingDto> GetOnelisting(int id);
-        Task AddListing(AddListingRequest addContactRequest);
+        Task AddListing(AddListingRequest addContactRequest,string fileName);
         Task UpdateListing(int id, UpdateListingRequest updateContactRequest);
-        Task<byte[]> GetImage(int id);
+        //Task<byte[]> GetImage(int id);
     }
 }

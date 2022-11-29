@@ -6,8 +6,8 @@ namespace JustGoApi.ViewModels
     {
         [Required]
         public string Title { get; set; }
-        public IFormFile Image { get; set; }
-        public float Price { get; set; }
+        public IFormFile? Image { get; set; }
+        public decimal Price { get; set; }
         [Required]
         public int CategoryId { get; set; }
         [Required]

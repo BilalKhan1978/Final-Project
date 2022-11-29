@@ -6,8 +6,10 @@ namespace JustGoApi.ViewModels
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public float Price { get; set; }
+        public decimal Price { get; set; }
         public int CategoryId { get; set; }
         public int UserId { get; set; }
+        public string? ImageSource { get; set; }
+        public string? ImageName { get; set; }
     }
 }
