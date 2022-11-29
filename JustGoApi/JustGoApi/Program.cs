@@ -2,15 +2,31 @@ using JustGoApi.Data;
 using JustGoApi.Handler;
 using JustGoApi.Services;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Linq.Expressions;
+using System.Security.Cryptography.Xml;
+using System.Text;
 //using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+//From .AddJsonOptions I added for token
+builder.Services.AddControllers().AddJsonOptions(option =>
+{
+  option.JsonSerializerOptions.PropertyNamingPolicy = null;
+});
+
+
+
+// I added for token
+builder.Services.AddDbContext<ReuseDbContext>(option 
+=> option.UseSqlServer(builder.Configuration.GetConnectionString("ReuseApiConnectionString")));
+
 
 // I Injected following service 
 builder.Services.AddScoped<IListingService, ListingService>();
@@ -19,36 +35,48 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    // I added this for basic authentication in swagger
-    c.AddSecurityDefinition("Basic", new OpenApiSecurityScheme
+builder.Services.AddSwaggerGen(c => {
+
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "JustGoApi", Version = "v1" });
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Description = "Basic auth added to authorization header",
+        Description = "Jwt Authorization",
         Name = "Authorization",
         In = ParameterLocation.Header,
-        Scheme = "basic",
-        Type = SecuritySchemeType.Http
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
     });
 
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-            {
-                {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Basic" }
-                    },
-                    new List<string>()
-                }
-            });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement { 
+    {
+        new OpenApiSecurityScheme
+    {
+        Reference = new OpenApiReference
+        {
+         Type = ReferenceType.SecurityScheme,
+         Id = "Bearer"
+        }
+    },
+      new string[]{}
+    }
+        
+    });
 });
 
-// I added for authentication
-builder.Services.AddAuthentication("BasicAuthentication").AddScheme<AuthenticationSchemeOptions,BasicAuthenticationHandler>("BasicAuthentication", null);
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+{
+    ValidateIssuer = true,
+    ValidateAudience = true,
+    ValidateLifetime = true,
+    ValidateIssuerSigningKey = true,
+    ValidIssuer = builder.Configuration["Jwt:Issuer"],
+    ValidAudience = builder.Configuration["Jwt:Audience"],
+    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:key"]))
 
-// I added these lines for InMemoryDatabase
-//builder.Services.AddDbContext<ContactsDbContext>(options =>
-//         options.UseInMemoryDatabase("ContactsDetails"));
+};
+});
 
 
 //I added to connect with Sql Server
@@ -69,7 +97,9 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+
+    //I added for token
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DemoJWTToken v1"));
 }
 // I added for retrieving static image files from folder
 app.UseStaticFiles(new StaticFileOptions
