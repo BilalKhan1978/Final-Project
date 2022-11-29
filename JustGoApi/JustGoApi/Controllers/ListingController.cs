@@ -27,7 +27,7 @@ namespace JustGoApi.Controllers
         public async Task<IActionResult> GetAllListing()
         {
             var listingList = await _listingService.GetAllListing();
-            listingList.ForEach(x => x.ImageSource = x.ImageName == null ? null :
+            listingList.ForEach(x => x.Image = x.ImageName == null ? null :
              String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImageName));
             return Ok(listingList);
         }
@@ -44,7 +44,7 @@ namespace JustGoApi.Controllers
                 {
                     return NotFound();
                 }
-                listing.ImageSource = listing.ImageName==null? null: String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, listing.ImageName);
+                listing.Image = listing.ImageName==null? null: String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, listing.ImageName);
                 return Ok(listing);
 
 

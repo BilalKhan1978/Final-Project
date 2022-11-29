@@ -9,7 +9,7 @@ namespace JustGoApi.ViewModels
         public decimal Price { get; set; }
         public int CategoryId { get; set; }
         public int UserId { get; set; }
-        public string? ImageSource { get; set; }
+        public string? Image { get; set; }
         public string? ImageName { get; set; }
     }
 }
