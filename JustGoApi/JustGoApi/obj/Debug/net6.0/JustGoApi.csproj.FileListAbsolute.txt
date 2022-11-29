@@ -124,3 +124,4 @@ C:\Users\bilal\OneDrive\Desktop\Final-Project\JustGoApi\JustGoApi\obj\Debug\net6
 C:\Users\bilal\OneDrive\Desktop\Final-Project\JustGoApi\JustGoApi\obj\Debug\net6.0\JustGoApi.pdb
 C:\Users\bilal\OneDrive\Desktop\Final-Project\JustGoApi\JustGoApi\obj\Debug\net6.0\JustGoApi.genruntimeconfig.cache
 C:\Users\bilal\OneDrive\Desktop\Final-Project\JustGoApi\JustGoApi\obj\Debug\net6.0\ref\JustGoApi.dll
+C:\Users\bilal\OneDrive\Desktop\Final-Project\JustGoApi\JustGoApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
